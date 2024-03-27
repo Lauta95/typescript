@@ -1,5 +1,6 @@
+"use strict";
 // *********type aliases & object types*********
-var add = function (a, b) {
+const add = (a, b) => {
     return a + b;
 };
-console.log(add(1, 's'));
+console.log(add(1, 2));
