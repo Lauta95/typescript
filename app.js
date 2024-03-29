@@ -4,12 +4,14 @@
 // };
 // console.log(add(1, 2));
 var Department = /** @class */ (function () {
-    function Department(n) {
+    function Department(id, name) {
+        this.id = id;
+        this.name = name;
+        // public name: string;
         this.employees = [];
-        this.name = n;
     }
     Department.prototype.describe = function () {
-        console.log('department ' + this.name);
+        console.log("department (".concat(this.id, "): ").concat(this.name));
     };
     Department.prototype.addEmployee = function (employee) {
         this.employees.push(employee);
@@ -20,7 +22,7 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
-var accounting = new Department('Accounting');
+var accounting = new Department('d1', 'Accounting');
 accounting.addEmployee('Lautaro');
 accounting.addEmployee('Ezequiel');
 accounting.describe();
