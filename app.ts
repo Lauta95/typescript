@@ -1,13 +1,19 @@
 // *********type aliases & object types*********
+
 // const add = (a: number, b: number) => {
 //     return a + b;
 // };
+
 // console.log(add(1, 2));
-var Department = /** @class */ (function () {
-    function Department(n) {
+
+class Department {
+    name: string;
+
+    constructor(n: string){
         this.name = n;
     }
-    return Department;
-}());
-var accounting = new Department('Accounting');
+}
+
+const accounting = new Department('Accounting');
+
 console.log(accounting);
