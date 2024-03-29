@@ -7,7 +7,7 @@
 // console.log(add(1, 2));
 
 class Department {
-    name: string;
+    public name: string;
     private employees: string[] = [];
 
     constructor(n: string) {
