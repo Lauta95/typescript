@@ -1,36 +1,18 @@
-// *********type aliases & object types*********
+interface Person {
+    name: string;
+    age: number;
 
-// const add = (a: number, b: number) => {
-//     return a + b;
-// };
-
-// console.log(add(1, 2));
-
-class Department {
-    // public name: string;
-    private employees: string[] = [];
-
-    constructor(private id: string, public name: string) {
-    }
-
-    describe(this: Department) {
-        console.log(`department (${this.id}): ${this.name}`);
-    }
-
-    addEmployee(employee: string) {
-        this.employees.push(employee);
-    }
-
-    printEmployeeInfo() {
-        console.log(this.employees.length);
-        console.log(this.employees);
-    }
+    greet(phrase: string): void;
 }
 
-const accounting = new Department('d1', 'Accounting');
+let user1: Person;
 
-accounting.addEmployee('Lautaro');
-accounting.addEmployee('Ezequiel');
+user1 = {
+    name: 'Lauta',
+    age: 28,
+    greet(phrase: string){
+        console.log(phrase + ' ' + this.name);
+    }
+};
 
-accounting.describe();
-accounting.printEmployeeInfo();
+user1.greet('Hola, soy')
