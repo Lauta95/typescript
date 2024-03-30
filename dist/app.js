@@ -1,29 +1,14 @@
 "use strict";
-// *********type aliases & object types*********
-// const add = (a: number, b: number) => {
-//     return a + b;
-// };
-// console.log(add(1, 2));
-class Department {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-        // public name: string;
-        this.employees = [];
+class Person {
+    constructor(n) {
+        this.age = 30;
+        this.name = n;
     }
-    describe() {
-        console.log(`department (${this.id}): ${this.name}`);
-    }
-    addEmployee(employee) {
-        this.employees.push(employee);
-    }
-    printEmployeeInfo() {
-        console.log(this.employees.length);
-        console.log(this.employees);
+    greet(phrase) {
+        console.log(phrase + ' ' + this.name);
     }
 }
-const accounting = new Department('d1', 'Accounting');
-accounting.addEmployee('Lautaro');
-accounting.addEmployee('Ezequiel');
-accounting.describe();
-accounting.printEmployeeInfo();
+let user1;
+user1 = new Person('Lauta');
+user1.greet('Hola, soy');
+console.log(user1);
