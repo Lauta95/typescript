@@ -19,7 +19,7 @@ class Person implements Greetable {
 
 let user1: Greetable;
 
-user1 = new Person('Lautaa');
+user1 = new Person('Lautaaa');
 
 user1.greet('Hola, soy');
 

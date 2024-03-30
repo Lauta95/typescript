@@ -9,6 +9,6 @@ class Person {
     }
 }
 let user1;
-user1 = new Person('Lauta');
+user1 = new Person('Lautaaa');
 user1.greet('Hola, soy');
 console.log(user1);
