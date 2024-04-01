@@ -1,14 +1,12 @@
 "use strict";
-class Person {
-    constructor(n) {
-        this.age = 30;
-        this.name = n;
+function countAndDescribe(element) {
+    let descriptionText = 'Got no value.';
+    if (element.length === 1) {
+        descriptionText = 'Got 1 element';
     }
-    greet(phrase) {
-        console.log(phrase + ' ' + this.name);
+    else if (element.length > 1) {
+        descriptionText = 'Got ' + element.length + ' elements.';
     }
+    return [element, descriptionText];
 }
-let user1;
-user1 = new Person('Lautaaa');
-user1.greet('Hola, soy');
-console.log(user1);
+console.log(countAndDescribe('hi thereeeee!'));
