@@ -1,3 +1,42 @@
+// Validation
+interface Validatable {
+    value: string | number;
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    min?: number;
+    max?: number;
+}
+function validate(validatableInput: Validatable) {
+    let isValid = true;
+    if (validatableInput.required) {
+        isValid = isValid && validatableInput.value.toString().trim().length !== 0;
+    }
+    if (validatableInput.minLength != null &&
+        typeof validatableInput.value === 'string'
+    ) {
+        isValid =
+            isValid && validatableInput.value.length >= validatableInput.minLength;
+    }
+    if (validatableInput.maxLength != null &&
+        typeof validatableInput.value === 'string'
+    ) {
+        isValid =
+            isValid && validatableInput.value.length <= validatableInput.maxLength;
+    }
+    if (validatableInput.min != null &&
+        typeof validatableInput.value === 'number'
+    ) {
+        isValid = isValid && validatableInput.value >= validatableInput.min;
+    }
+    if (validatableInput.max != null &&
+        typeof validatableInput.value === 'number'
+    ) {
+        isValid = isValid && validatableInput.value <= validatableInput.max;
+    }
+    return isValid
+}
+
 // Autobind
 function autobind(
     // para ignorar target y methodName agregar underscores para anularlos:
@@ -50,12 +89,33 @@ class ProjectInput {
         const enteredTitle = this.titleInputElement.value;
         const enteredDescription = this.descriptionInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
+        // aca se toma el input y se usa la class validatable
+        const titleValidatable: Validatable = {
+            value: enteredTitle,
+            required: true
+        };
+        const descriptionValidatable: Validatable = {
+            value: enteredDescription,
+            required: true,
+            minLength: 5
+        };
+        const peopleValidatable: Validatable = {
+            value: +enteredPeople,
+            required: true,
+            min: 1,
+            max: 5
+        };
 
         if (
             // Condicional para evitar que queden inputs en blanco.
-            enteredTitle.trim().length === 0 ||
-            enteredDescription.trim().length === 0 ||
-            enteredPeople.trim().length === 0
+            // enteredTitle.trim().length === 0 ||
+            // enteredDescription.trim().length === 0 ||
+            // enteredPeople.trim().length === 0
+
+            // usando validations asi aplicamos TS en lugar de plain JS. arriba está la logica de las validations
+            !validate(titleValidatable) ||
+            !validate(descriptionValidatable) ||
+            !validate(peopleValidatable)
         ) {
             alert('no blank spaces!');
             return;
@@ -68,10 +128,9 @@ class ProjectInput {
 
     // metodo para borrar todos los inputs una vez submiteado
     private clearInput() {
-        this.titleInputElement.value='';
-        this.descriptionInputElement.value='';
-        this.peopleInputElement.value='';
-        
+        this.titleInputElement.value = '';
+        this.descriptionInputElement.value = '';
+        this.peopleInputElement.value = '';
     }
 
     @autobind
