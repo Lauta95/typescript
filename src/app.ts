@@ -1,3 +1,22 @@
+// Autobind
+function autobind(
+    // para ignorar target y methodName agregar underscores para anularlos:
+    _: any,
+    _2: string,
+    descriptor: PropertyDescriptor
+) {
+    const originalMethod = descriptor.value;
+    const adjDescriptor: PropertyDescriptor = {
+        configurable: true,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        }
+    };
+    return adjDescriptor;
+};
+
+// class
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
@@ -26,15 +45,49 @@ class ProjectInput {
         this.configure();
         this.attach();
     }
+    // TUPLE: [] 
+    private gatherUserInput(): [string, string, number] | void {
+        const enteredTitle = this.titleInputElement.value;
+        const enteredDescription = this.descriptionInputElement.value;
+        const enteredPeople = this.peopleInputElement.value;
 
-    private submitHandler(event: Event) {
-        event.preventDefault();
-        console.log(this.titleInputElement.value);
+        if (
+            // Condicional para evitar que queden inputs en blanco.
+            enteredTitle.trim().length === 0 ||
+            enteredDescription.trim().length === 0 ||
+            enteredPeople.trim().length === 0
+        ) {
+            alert('no blank spaces!');
+            return;
+            // aca para que acepte el return y no meter un error handler: se mete undefined en el TUPLE, al ser TS se usa void.
+        } else {
+            return [enteredDescription, enteredPeople, +enteredTitle]
+            // el + es como un parseFloat para convertir el input a number, como lo es requerido por el TUPLE
+        }
+    }
+
+    // metodo para borrar todos los inputs una vez submiteado
+    private clearInput() {
+        this.titleInputElement.value='';
+        this.descriptionInputElement.value='';
+        this.peopleInputElement.value='';
         
     }
 
+    @autobind
+    private submitHandler(event: Event) {
+        event.preventDefault();
+        const userInput = this.gatherUserInput();
+        // para indicar a TS que estamos hablando del tuple le tenemos que mandar array porque en JS un TUPLE es un array
+        if (Array.isArray(userInput)) {
+            const [title, desc, people] = userInput;
+            console.log(title, desc, people);
+            this.clearInput()
+        }
+    }
+
     private configure() {
-        this.element.addEventListener('submit', this.submitHandler.bind(this));
+        this.element.addEventListener('submit', this.submitHandler);
     }
 
     private attach() {
