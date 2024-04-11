@@ -121,7 +121,7 @@ class ProjectInput {
             return;
             // aca para que acepte el return y no meter un error handler: se mete undefined en el TUPLE, al ser TS se usa void.
         } else {
-            return [enteredDescription, enteredPeople, +enteredTitle]
+            return [enteredTitle, enteredDescription, +enteredPeople]
             // el + es como un parseFloat para convertir el input a number, como lo es requerido por el TUPLE
         }
     }

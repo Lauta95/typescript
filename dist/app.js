@@ -84,7 +84,7 @@ class ProjectInput {
             return;
         }
         else {
-            return [enteredDescription, enteredPeople, +enteredTitle];
+            return [enteredTitle, enteredDescription, +enteredPeople];
         }
     }
     clearInput() {
