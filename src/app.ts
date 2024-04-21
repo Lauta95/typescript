@@ -189,13 +189,13 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
     }
     // en vez de usar bind al final de this.dragStartHandler, se usa el decorator @autobind ya codeado
     @autobind
-    dragStartHandler(event: DragEvent) { 
+    dragStartHandler(event: DragEvent) {
         console.log(event);
     }
 
-    dragEndHandler(_: DragEvent) { 
+    dragEndHandler(_: DragEvent) {
         console.log('DragEnd');
-        
+
     }
 
     configure() {
@@ -211,8 +211,8 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
 }
 
 // class de las listas
-class ProjectList extends Component<HTMLDivElement, HTMLElement> {
-
+class ProjectList extends Component<HTMLDivElement, HTMLElement>
+    implements DragTarget {
     assignProject: Project[];
 
     constructor(private type: 'active' | 'finished') {
@@ -223,7 +223,24 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
         this.renderContent();
     }
 
+    @autobind
+    dragOverHandler(_: DragEvent) {
+        const listEl = this.element.querySelector('ul')!;
+        listEl.classList.add('droppable');
+    }
+
+    dropHandler(_: DragEvent) { }
+
+    @autobind
+    dragLeaveHandler(_: DragEvent) {
+        const listEl = this.element.querySelector('ul')!;
+        listEl.classList.remove('droppable');
+    }
+
     configure() {
+        this.element.addEventListener('dragover', this.dragOverHandler);
+        this.element.addEventListener('dragleave', this.dragLeaveHandler);
+        this.element.addEventListener('drop', this.dropHandler);
         projectState.addListener((projects: Project[]) => {
             const relevantProjects = projects.filter(prj => {
                 if (this.type === 'active') {
