@@ -183,7 +183,7 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
     private project: Project;
     // getter para que salga en singular o plural en el html
     get persons() {
-        if (this.project.people = 1) {
+        if (this.project.people === 1) {
             return '1 person';
         } else {
             return `${this.project.people} persons`

@@ -115,7 +115,7 @@ class Component {
 }
 class ProjectItem extends Component {
     get persons() {
-        if (this.project.people = 1) {
+        if (this.project.people === 1) {
             return '1 person';
         }
         else {
