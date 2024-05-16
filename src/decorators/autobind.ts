@@ -1,4 +1,3 @@
-namespace App {
     // Autobind
     export function autobind(
         // para ignorar target y methodName agregar underscores para anularlos:
@@ -16,5 +15,3 @@ namespace App {
         };
         return adjDescriptor;
     };
-
-}

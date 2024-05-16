@@ -1,5 +1,7 @@
-namespace App {
-    // project state managment
+import { Project, ProjectStatus } from "../models/project.js";
+
+
+// project state managment
     type Listener<T> = (items: T[]) => void;
     class State<T> {
         // protected es para inheritance clases, no se puede seguir entrando desde afuera de la clase, pero se puede entrar desde cualquier clase que hace inheritancia 
@@ -54,4 +56,3 @@ namespace App {
     }
 
     export const projectState = ProjectState.getInstance();
-}

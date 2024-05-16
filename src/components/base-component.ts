@@ -1,4 +1,3 @@
-namespace App {
     // class de las bases
     // se usa abstract para asegurarnos que no pueda ser instanceada.
     export abstract class Component<T extends HTMLElement, U extends HTMLElement> {
@@ -35,4 +34,3 @@ namespace App {
         abstract configure(): void;
         abstract renderContent(): void;
     }
-}
